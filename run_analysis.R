@@ -43,12 +43,12 @@ index_vect <- c(subj_index, activity_index, mean_index, std_index)
 index_vect <- sort(index_vect)
 merged_df <- merged_df[,index_vect]
 
-#This step assigns the correct activity name to each observation in the merged dataset.
+##This step assigns the correct activity name to each observation in the merged dataset.
 
 activity_labels <- read.table("UCI HAR Dataset/activity_labels.txt", sep = "")
 merged_df$activity <- activity_labels[match(merged_df$activity,activity_labels$V1),"V2"]
 
-#The following code cleans up the variable names to be more readable.
+##The following code cleans up the variable names to be more readable.
 
 names(merged_df) <- gsub("-",".",names(merged_df))
 names(merged_df) <- gsub("mean()","Mean",names(merged_df))
@@ -68,3 +68,6 @@ summary_names[-(1:2)] <- paste0("Avg.of.",summary_names[-(1:2)])
 names(summary_df) <- summary_names
 View(summary_df)
 
+##The final step writes the summary table to a text file
+
+write.table(summary_df,"Final_Summary_Data.txt", row.names = FALSE)
